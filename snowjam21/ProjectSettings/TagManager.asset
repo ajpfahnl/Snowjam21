@@ -13,13 +13,13 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - touchingGround
+  - terrain
+  - player
+  - playerAtk
+  - enemy
+  - enemyAtk
+  - powerup
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: enemy
+    uniqueID: 743235185
+    locked: 0
+  - name: player
+    uniqueID: 1452649869
+    locked: 0
+  - name: cursor
+    uniqueID: 1898318419
+    locked: 0
+  - name: UI
+    uniqueID: 2136313031
     locked: 0
