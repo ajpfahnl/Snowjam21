@@ -9,7 +9,21 @@ public class mainCam : MonoBehaviour
     public static Transform trfm;
     Vector3 pos;
     float trauma;
+
+    public Camera cam;
+    public Transform hpTrfm;
+    public Transform pupIconTrfm;
+    public Transform score;
+
+    public Transform bckgrnd;
+    Vector3 bckgrndPos;
+
     public static float riseRate;
+
+    public int width;
+    public float scaler;
+
+    bool every2;
 
     private void Awake()
     {
@@ -20,9 +34,28 @@ public class mainCam : MonoBehaviour
     {
         trfm = transform;
         pos = new Vector3(0,-7,-10);
+        bckgrndPos = bckgrnd.position;
+
+        Vector3 hpPos = cam.WorldToViewportPoint(trfm.position);
+        hpPos.x = Mathf.Clamp01(0.02f);
+        hpPos.y = Mathf.Clamp01(0.02f);
+        hpPos.z = 10;
+        hpTrfm.position = cam.ViewportToWorldPoint(hpPos);
+        hpPos.x = Mathf.Clamp01(0.98f);
+        pupIconTrfm.position = cam.ViewportToWorldPoint(hpPos);
+        hpPos.x = Mathf.Clamp01(0.02f);
+        hpPos.y = Mathf.Clamp01(0.98f);
+        score.position = cam.ViewportToWorldPoint(hpPos);
     }
     private void FixedUpdate()
     {
+        if (every2)
+        {
+            bckgrndPos.y = (trfm.position.y + 6)/1.3f + 81;
+            bckgrnd.position = bckgrndPos;
+        }
+        every2 = !every2;
+
         if (gameState.started && !gameState.lost)
         {
             traumaSystem();
@@ -30,7 +63,7 @@ public class mainCam : MonoBehaviour
             pos.y += riseRate;
             trfm.position = pos;
             
-        } else if (Input.anyKey)
+        } else if (Input.anyKey && !gameState.lost)
         {
             gameState.doStart();
         }

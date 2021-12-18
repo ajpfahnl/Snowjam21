@@ -8,6 +8,8 @@ public class flameThrower : MonoBehaviour
     public static bool overheated;
     public Transform[] rings;
     public Transform[] masks;
+    public SpriteRenderer[] rend;
+    public Sprite[] sprites;
     bool offsetted;
     Vector3 rotation;
 
@@ -68,12 +70,15 @@ public class flameThrower : MonoBehaviour
                 if (offsetted)
                 {
                     offsetted = false;
-                    masks[0].localPosition = new Vector3(-.75f, 0, 0);
-                    masks[1].localPosition = new Vector3(.75f, 0, 0);
+                    masks[0].localPosition = new Vector3(-1.5f, 0, 0);
+                    masks[1].localPosition = new Vector3(1.5f, 0, 0);
                 }
             } else
             {
                 overheated = true;
+                rend[0].sprite = sprites[1];
+                rend[1].sprite = sprites[1];
+                rend[2].sprite = sprites[3];
             }
         } else
         {
@@ -90,9 +95,20 @@ public class flameThrower : MonoBehaviour
             rings[0].localEulerAngles = rotation;
             rotation.z = 360 - fuel/200f*180;
             rings[1].localEulerAngles = rotation;
+            if (overheated && fuel==120)
+            {
+                masks[0].localPosition = new Vector3(-1.5f, -2.8f, 0);
+                masks[1].localPosition = new Vector3(1.5f, -2.8f, 0);
+            }
         } else
         {
-            if (overheated) { overheated = false; }
+            if (overheated)
+            {
+                overheated = false;
+                rend[0].sprite = sprites[0];
+                rend[1].sprite = sprites[0];
+                rend[2].sprite = sprites[2];
+            }
             if (!offsetted)
             {
                 masks[0].localPosition = new Vector3(-10, 0, 0);

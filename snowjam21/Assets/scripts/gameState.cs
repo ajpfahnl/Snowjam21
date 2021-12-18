@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class gameState : MonoBehaviour
 {
+
+    public AudioSource music;
     public static gameState gameStateScr;
     public static bool started;
     public static bool lost;
@@ -27,6 +29,17 @@ public class gameState : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (lost)
+        {
+            if (gameStateScr.music.volume > 0)
+            {
+                gameStateScr.music.volume -= .02f;
+            }
+        }
+    }
+
     public static void restart()
     {
         Time.timeScale = 1;
@@ -40,9 +53,11 @@ public class gameState : MonoBehaviour
     {
         gameStateScr.startText.SetActive(false);
         started = true;
-        mapGenerator.spawnChance = 125;
-        gameStateScr.flames.Play();
 
+        gameStateScr.flames.Play();
+        gameStateScr.music.Play();
+
+        mapGenerator.spawnChance = 125;
         mapGenerator.elapsedTime = 0;
         mainCam.riseRate = .03f;
     }

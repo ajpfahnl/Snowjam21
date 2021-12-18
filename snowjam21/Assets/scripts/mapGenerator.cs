@@ -18,7 +18,7 @@ public class mapGenerator : MonoBehaviour
     private void Awake()
     {
         InvokeRepeating("sec", 1, 1);
-        mapGenerator.spawnChance = 125;
+        mapGenerator.spawnChance = 140;
 
         lastChunk = -1;
 

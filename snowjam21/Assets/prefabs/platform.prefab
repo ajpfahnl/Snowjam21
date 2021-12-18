@@ -77,7 +77,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 21.935604, y: 6.48}
+  m_Size: {x: 21.684706, y: 5.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -102,9 +102,12 @@ MonoBehaviour:
   - {fileID: 3477275781131686749, guid: fbfeed78adfa7f54684fb50db06d1427, type: 3}
   powerup: {fileID: 720808971694827036, guid: 0b564a9f10faa524cb5ece9a2a6af03d, type: 3}
   trfm: {fileID: 253939163681653875}
-  closed: {fileID: 21300000, guid: 49356ee716c2f2844bd9fbfa210ac07a, type: 3}
+  plats:
+  - {fileID: 21300000, guid: 49356ee716c2f2844bd9fbfa210ac07a, type: 3}
+  - {fileID: 21300000, guid: 828d9f7120fbb5f4ea6730871cd475fe, type: 3}
   rend: {fileID: 7478653951623303454}
   boxCol: {fileID: 98595542479625220}
+  hotWire: {fileID: 3285713463934636154, guid: d2d5deb96a26b8e4bbf47e42ad2ee98c, type: 3}
 --- !u!61 &98595542479625220
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -123,7 +126,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 21.684706, y: 5.4}
-    newSize: {x: 21.935604, y: 6.48}
+    newSize: {x: 21.684706, y: 5.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

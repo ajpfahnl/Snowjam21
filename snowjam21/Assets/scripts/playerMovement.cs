@@ -30,6 +30,7 @@ public class playerMovement : MonoBehaviour
     public pupIconMan pupIconScr;
     int[] powerupTmr; //0: jelly; 1: peanutButter; 2: cheese; 3: butter; 4: avocado
     public GameObject pbShield;
+    public GameObject avocGlow;
     public flameThrower flameThrowerScr;
     bool every2;
 
@@ -37,6 +38,8 @@ public class playerMovement : MonoBehaviour
     void Start()
     {
         powerupTmr = new int[5];
+        powerupTmr[4] = 9999999;
+        //NOTE DONT FORGET TO CHANGE BACK THE POWERUP BELOW
         plyrMoveScr = GetComponent<playerMovement>();
         trfm = transform;
         hp = 3;
@@ -131,7 +134,7 @@ public class playerMovement : MonoBehaviour
 
         if (trfm.position.y < mainCam.trfm.position.y - 4.5f && freePhys < 1)
         {
-            takeDmg(trfm.position + new Vector3(Random.Range(-2f, 2f), -4, 0), 26);
+            takeDmg(trfm.position + new Vector3(Random.Range(-3f, 3f), -4, 0), 30, true);
         }
 
         if (every2)
@@ -164,6 +167,10 @@ public class playerMovement : MonoBehaviour
                         {
                             spd = 7;
                         }
+                        if (i == 4)
+                        {
+                            avocGlow.SetActive(false);
+                        }
                     }
                 }
             }
@@ -175,12 +182,12 @@ public class playerMovement : MonoBehaviour
     {
         if (col.gameObject.layer == 13 && immunity<1)
         {
-            takeDmg(col.transform.position, 18);
+            takeDmg(col.transform.position, 18, false);
         }
     }
-    public void takeDmg(Vector2 source, int force)
+    public void takeDmg(Vector2 source, int force, bool forceKB)
     {
-        if (powerupTmr[1] <= 0)
+        if (powerupTmr[1] <= 0 && powerupTmr[4] <= 0)
         {
             hp--;
             hpScr[hp].loseHP();
@@ -203,9 +210,14 @@ public class playerMovement : MonoBehaviour
         }
         else
         {
-            powerupTmr[1] = 0;
-            pbShield.SetActive(false);
-            pupIconScr.endPowerup(1);
+            if (forceKB) { knockback(source, force); }
+            if (powerupTmr[4] <= 0)
+            {
+                powerupTmr[1] = 0;
+                pbShield.SetActive(false);
+                pupIconScr.endPowerup(1);
+                immunity = 25;
+            }
         }
     }
 
@@ -222,7 +234,7 @@ public class playerMovement : MonoBehaviour
     {
         if (powerupID == 0) //jelly
         {
-            powerupTmr[0] = 200;
+            powerupTmr[0] = 250;
             jumpHeight = 28;
             pupIconScr.addPowerup(0);
         }
@@ -237,7 +249,7 @@ public class playerMovement : MonoBehaviour
         }
         if (powerupID == 2) //peanut butter
         {
-            powerupTmr[1] = 150;
+            powerupTmr[1] = 300;
             pupIconScr.addPowerup(1);
             pbShield.SetActive(true);
         }
@@ -250,7 +262,7 @@ public class playerMovement : MonoBehaviour
         if (powerupID == 4) //butter
         {
             spd = 11;
-            powerupTmr[3] = 200;
+            powerupTmr[3] = 250;
             pupIconScr.addPowerup(3);
         }
         if (powerupID == 5) //honey
@@ -261,6 +273,12 @@ public class playerMovement : MonoBehaviour
                 hp++;
                 updateSprite();
             }
+        }
+        if (powerupID == 6) //avocado
+        {
+            //powerupTmr[4] = 150;
+            pupIconScr.addPowerup(4);
+            avocGlow.SetActive(true);
         }
     }
 

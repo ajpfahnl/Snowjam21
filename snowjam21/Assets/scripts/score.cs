@@ -46,7 +46,7 @@ public class score : MonoBehaviour
                 {
                     passedTens = true;
                     numRends[1].enabled = true;
-                    scoreboardTrfm.localPosition = new Vector3(.3f,4.4f,10);
+                    scoreboardTrfm.localPosition += new Vector3(.9f,0,0);
                     setSprite(1, points%100/10);
                 }
             } else
@@ -56,7 +56,7 @@ public class score : MonoBehaviour
                 {
                     passedHunds = true;
                     numRends[2].enabled = true;
-                    scoreboardTrfm.localPosition = new Vector3(.6f, 4.4f, 10);
+                    scoreboardTrfm.localPosition += new Vector3(.9f, 0, 0);
                     setSprite(2, points / 100);
                 }
             }

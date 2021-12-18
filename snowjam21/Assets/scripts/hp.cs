@@ -13,10 +13,12 @@ public class hp : MonoBehaviour
     public Sprite[] lost;
     public Sprite[] restore;
     Transform trfm;
+    float yDefault;
     // Start is called before the first frame update
     void Start()
     {
         trfm = transform;
+        yDefault = trfm.localPosition.y;
     }
 
     private void FixedUpdate()
@@ -41,14 +43,14 @@ public class hp : MonoBehaviour
     {
         anim = 1;
         cycler = 0;
-        trfm.localPosition = new Vector3(trfm.localPosition.x, -.55f, 0);
+        trfm.localPosition = new Vector3(trfm.localPosition.x, -.55f + yDefault, 0);
         rend.sprite = lost[0];
     }
     public void recoverHP()
     {
         anim = 2;
         cycler = 0;
-        trfm.localPosition = new Vector3(trfm.localPosition.x, 0, 0);
+        trfm.localPosition = new Vector3(trfm.localPosition.x, yDefault, 0);
         rend.sprite = restore[0];
     }
     

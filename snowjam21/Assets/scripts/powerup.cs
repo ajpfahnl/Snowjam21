@@ -19,7 +19,7 @@ public class powerup : MonoBehaviour
     void Start()
     {
         trfm = transform;
-        powerupID = Random.Range(0,6);
+        powerupID = Random.Range(0,7);
         rend.sprite = sprites[powerupID];
     }
 
