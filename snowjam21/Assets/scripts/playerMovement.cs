@@ -23,6 +23,9 @@ public class playerMovement : MonoBehaviour
     public Sprite[] toastSprites;
     public int hp;
     public hp[] hpScr;
+    int spreadID;
+    public Sprite[] spreadSprites;
+    public SpriteRenderer spreadRend;
     public SpriteRenderer rend;
     public SpriteRenderer whiteFlash;
     int immunity;
@@ -37,6 +40,7 @@ public class playerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spreadID = -1;
         powerupTmr = new int[5];
         plyrMoveScr = GetComponent<playerMovement>();
         trfm = transform;
@@ -278,6 +282,7 @@ public class playerMovement : MonoBehaviour
             pupIconScr.addPowerup(4);
             avocGlow.SetActive(true);
         }
+        //if (spreadID == -1) { spreadRend.sprite = spreadSprites[powerupID]; spreadID = powerupID; }
     }
 
     void updateSprite()
