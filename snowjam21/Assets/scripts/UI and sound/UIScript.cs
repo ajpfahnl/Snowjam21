@@ -40,9 +40,15 @@ public class UIScript : MonoBehaviour
         }
 
         //swap between panels in how to play
-        panel[pageNum].SetActive(true);
-        panel[pageNum - 1].SetActive(false);
-        panel[pageNum + 1].SetActive(false);
+        if(pageNum == 0)
+        {
+            panel[0].SetActive(true);
+            panel[1].SetActive(false);
+        } else if(pageNum == 1)
+        {
+            panel[0].SetActive(false);
+            panel[1].SetActive(true);
+        }
 
         /*
         soundManager.SetBGM(bgmOn);
@@ -64,10 +70,12 @@ public class UIScript : MonoBehaviour
     public void Next()
     {
         pageNum ++;
+        Debug.Log(pageNum);
     }
 
     public void Back(){
         pageNum --;
+        Debug.Log(pageNum);
     }
 
     //toggles
