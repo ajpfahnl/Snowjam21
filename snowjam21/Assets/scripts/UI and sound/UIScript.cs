@@ -8,12 +8,20 @@ public class UIScript : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] GameObject howToPlay;
+    [SerializeField] GameObject pauseMenu;
     [SerializeField] Button bgm, sfx;
     [SerializeField] Sprite[] images; //set in inspector
 
     [Header("How To Play Panels")]
     [SerializeField] GameObject[] panel;
     int pageNum = 0;
+
+    [Header("Scenes")]
+    [SerializeField] string menu = "StartScreen", game = "SampleScene";
+
+    /*[Header("Audio")]
+    [SerializeField] AudioSource music;
+    [SerializeField] Audio*/
 
     //[SerializeField] SoundManager soundManager;
     private bool bgmOn = true;
@@ -67,6 +75,19 @@ public class UIScript : MonoBehaviour
         howToPlay.SetActive(true);
     }
 
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        pauseMenu.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
+    }
+
+
     public void Next()
     {
         pageNum ++;
@@ -91,5 +112,16 @@ public class UIScript : MonoBehaviour
         Debug.Log(sfxOn);
     }
 
+
+    //SCENE MANAGEMENT
+    public void QuitToMenu()
+    {
+        SceneManager.LoadScene(menu);
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(game);
+    }
 
 }
