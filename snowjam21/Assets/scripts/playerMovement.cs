@@ -38,8 +38,6 @@ public class playerMovement : MonoBehaviour
     void Start()
     {
         powerupTmr = new int[5];
-        powerupTmr[4] = 9999999;
-        //NOTE DONT FORGET TO CHANGE BACK THE POWERUP BELOW
         plyrMoveScr = GetComponent<playerMovement>();
         trfm = transform;
         hp = 3;
@@ -276,7 +274,7 @@ public class playerMovement : MonoBehaviour
         }
         if (powerupID == 6) //avocado
         {
-            //powerupTmr[4] = 150;
+            powerupTmr[4] = 150;
             pupIconScr.addPowerup(4);
             avocGlow.SetActive(true);
         }
